@@ -4,7 +4,7 @@ use <BOSL/masks.scad>
 use <BOSL/shapes.scad>
 
 // 模型精细度
-$fn = 4;
+$fn = 16;
 ruler_max_length = 100;
 
 
@@ -77,7 +77,7 @@ module scale_number_array(interval, size, thick, length){
 // thick: 厚度
 module scale_label(size, thick){
     linear_extrude(height=thick)
-        text(text = "0.02 mm / cm", size = size);
+        text(text = "0.05 mm / cm", size = size);
 }
 
 // 底面
