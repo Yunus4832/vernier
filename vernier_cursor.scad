@@ -9,18 +9,22 @@ $fn = 16;
 // 游标卡尺游标
 module vernier_cursor(){
     difference(){
-        difference() {
-            difference(){
+        difference(){
+            difference() {
                 difference(){
-                    vernier_cursor_base();
-                    scale_slot(60);
+                    difference(){
+                        vernier_cursor_base();
+                        scale_slot(60);
+                    }
+                    up(3) cube([20, 24, 6], center=true);
                 }
-                up(3) cube([20, 20, 6], center=true);
+                cursor_scale(19);
             }
-            cursor_scale(19);
+            translate([26, -22, 0])
+                fillet_mask_z(l=6, r=2);
         }
-        translate([26, -20, 0])
-            fillet_mask_z(l=6, r=1);
+        translate([36, -22, 0])
+            fillet_mask_z(l=6, r=2);
     }
 }
 
@@ -36,15 +40,15 @@ module bottom_surface(){
     bottom_surface_points = [
         [10, -42],
         [10, -5],
-        [2, -5],
-        [2, 0],
-        [6, 10],
-        [6, 2],
+        [0, -5],
+        [0, 0],
+        [5, 12],
+        [5, 2],
         [36, 2],
-        [36, -20],
+        [36, -22],
+        [26, -22],
         [26, -20],
-        [26, -18],
-        [16, -18],
+        [16, -20],
         [12, -42]
     ];
     polygon(points=bottom_surface_points);
@@ -56,10 +60,10 @@ module cursor_scale(length){
     yflip()
     union(){
         union(){
-            scale_array(9.5, 0.2, 3, 0.5, length);
-            scale_array(4.75, 0.2, 2, 0.5, length);
+            scale_array(9.5, 0.2, 4, 0.5, length);
+            scale_array(4.75, 0.2, 3, 0.5, length);
         }
-        scale_array(0.95, 0.2, 1, 0.5, length);
+        scale_array(0.95, 0.2, 2, 0.5, length);
     }
 }
 
@@ -78,16 +82,16 @@ module scale_array(interval, thick, w, h, length){
 // 刻度尺槽
 module scale_slot(length){
     slot_side_points = [
-        [0, 0],
-        [-0.5, 0],
-        [-0.85, -0.35],
-        [-1.2, 0],
-        [-3, 0],
-        [-3, -15],
-        [-1.2, -15],
-        [-0.85, -14.65],
-        [-0.5, -15],
-        [0, -15]
+        [0, 0.1],
+        [-0.7, 0.1],
+        [-1.05, -0.34],
+        [-1.4, 0.1],
+        [-3, 0.1],
+        [-3, -15.1],
+        [-1.4, -15.1],
+        [-1.05, -14.66],
+        [-0.7, -15.1],
+        [0, -15.1]
     ];
     yrot(90)
     linear_extrude(height = length)

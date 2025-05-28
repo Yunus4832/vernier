@@ -5,7 +5,7 @@ use <BOSL/shapes.scad>
 
 // 模型精细度
 $fn = 16;
-ruler_max_length = 100;
+ruler_max_length = 88;
 
 
 // 游标卡尺刻度尺
@@ -15,7 +15,7 @@ module vernier_scale() {
             vernier_scale_base();
             base_scale(ruler_max_length - 12);
         }
-        translate([8, -7.5, 0.5])
+        translate([8, -7.5, 0.7])
             slide_way(ruler_max_length - 7.9, 15.2, 0.8);
     }
 }
@@ -25,7 +25,7 @@ module vernier_scale_base() {
     difference(){
         linear_extrude(height = 2)
             bottom_surface();
-        up(2) right(5) xrot(-atan(2/10)) cube([6, 12, 5]);
+        up(2) right(4) xrot(-atan(2/12)) cube([7, 15, 5]);
     }
 }
 
@@ -36,14 +36,14 @@ module base_scale(length){
     union(){
         union(){
             scale_array(10, 0.2, 5.1, 0.5, length);
-            scale_array(5, 0.2, 3.1, 0.5, length);
+            scale_array(5, 0.2, 4.1, 0.5, length);
         }
-        scale_array(1, 0.2, 1.1, 0.5, length);
+        scale_array(1, 0.2, 3.1, 0.5, length);
     }
-    translate([11.5, -9, 1.6])
-    scale_number_array(10, 2, 0.5, length);
-    translate([11.5, -5, 1.6])
-    scale_label(2, 0.5);
+    translate([11, -9, 1.6])
+    scale_number_array(10, 3, 0.5, length);
+    translate([11, -4, 1.6])
+    scale_label(3, 0.5);
 }
 
 // 刻度阵列
@@ -84,8 +84,8 @@ module scale_label(size, thick){
 module bottom_surface(){
     bottom_surface_points = [
         [0, 0],
-        [6, 0],
-        [6, 10],
+        [5, 0],
+        [5, 12],
         [10, 5],
         [10, 0],
         [ruler_max_length, 0],
